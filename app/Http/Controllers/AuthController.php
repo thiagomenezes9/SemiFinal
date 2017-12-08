@@ -40,9 +40,27 @@ class AuthController extends Controller
 
 
 
-        if(!Auth::attempt($credentials)){
-            return redirect()->back()->with('fail','Usuário ou senha invalidos SEU BURRO!!')->withInput();
+        $user = User::where('email',$request->email)->first();
+
+
+
+
+        if($user){
+
+            if($user->active){
+               if(!Auth::attempt($credentials)){
+                return redirect()->back()->with('fail','Senha invalido!!')->withInput();
+            }
+
+            }else{
+                return redirect()->back()->with('fail','Usuário sem acesso ao sistema!!')->withInput();
+            }
+
+
+        }else{
+            return redirect()->back()->with('fail','Email invalido!!')->withInput();
         }
+
 
         return redirect('dashboard');
 
@@ -55,8 +73,8 @@ class AuthController extends Controller
         $this->validate($request,[
             'email' => ['required','max:255','email','unique:users'],
             'password'=>['required','min:6','max:255','confirmed'],
-            'name'=>['required','max:255'],
-            'matricula'=>['required','max:20']
+            'name'=>['required','max:255']
+
 
         ]);
 

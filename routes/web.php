@@ -19,6 +19,8 @@
 //
 //Route::get('/home', 'HomeController@index')->name('home');
 
+//Route::get('/', array('as' => 'auth.login', 'uses' => 'AuthController@login'));
+
 
 
 Route::group(['middleware'=>['web']],function(){
