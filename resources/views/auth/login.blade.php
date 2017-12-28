@@ -149,6 +149,13 @@
                                     </div>
 
 
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="remember">Relembrar senha
+                                        </label>
+                                    </div>
+
+
 
 
 

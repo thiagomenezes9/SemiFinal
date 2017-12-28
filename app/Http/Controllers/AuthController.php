@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+
+
+    use AuthenticatesUsers;
 
 
     public function __construct(){
@@ -40,17 +44,32 @@ class AuthController extends Controller
 
 
 
+        $remember = $request->has('remember');
+
+
         $user = User::where('email',$request->email)->first();
 
 
+
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
 
 
         if($user){
 
             if($user->active){
-               if(!Auth::attempt($credentials)){
-                return redirect()->back()->with('fail','Senha invalido!!')->withInput();
-            }
+//               if(!Auth::attempt($credentials)){
+//                return redirect()->back()->with('fail','Senha invalido!!')->withInput();
+//                }
+
+                if(!Auth::attempt($credentials, $remember)){
+                    $this->incrementLoginAttempts($request);
+                    return redirect()->back()->with('fail','Usuário ou senha invalidos!!')->withInput();
+                }
+
 
             }else{
                 return redirect()->back()->with('fail','Usuário sem acesso ao sistema!!')->withInput();
@@ -58,7 +77,7 @@ class AuthController extends Controller
 
 
         }else{
-            return redirect()->back()->with('fail','Email invalido!!')->withInput();
+            return redirect()->back()->with('fail','Usuário ou senha invalidos!!')->withInput();
         }
 
 
