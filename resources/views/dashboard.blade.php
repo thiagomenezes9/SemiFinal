@@ -22,14 +22,8 @@
                         <div class="panel-body">
 
 
-                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 
 
-
-
-
-                            </div>
-                            {{--</div>--}}
                         </div>
 
 
