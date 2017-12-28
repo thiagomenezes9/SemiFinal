@@ -23,57 +23,10 @@
 
 
                             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                {{--<ol class="carousel-indicators">--}}
-                                {{--<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>--}}
-                                {{--<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>--}}
-                                {{--<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>--}}
-                                {{--</ol>--}}
 
 
 
-                                <div class="carousel-inner" role="listbox">
-                                    @if(empty($publicacaoes))
 
-                                        @for($i=0;$i<count($publicacoes);$i++)
-                                            <div class="item {{ $i==0 ? 'active': '' }} ">
-
-                                                @if(empty($publicacoes[$i]->imagem))
-
-                                                    <img id="imagem" src="{{URL::asset('/Modelo.jpg')}}"/>
-
-
-                                                    <div id="titulo">
-                                                        {{$publicacoes[$i]->titulo}}
-                                                    </div>
-
-
-                                                    <div id="texto">
-                                                        {{$publicacoes[$i]->texto}}
-                                                    </div>
-
-                                                    <h3 style="color:black; text-align: center">{{$publicacoes[$i]->titulo}}</h3>
-
-                                                @else
-                                                    <img src="{{$publicacoes[$i]->imagem}} " width="100%" height="100%" title="{{$publicacoes[$i]->titulo}}"/>
-
-                                                    <h3 style="color:black; text-align: center">{{$publicacoes[$i]->titulo}}</h3>
-
-                                                @endif
-
-                                            </div>
-
-
-
-                                        @endfor
-
-
-                                    @else
-                                        <h3>Sem Publicações</h3>
-
-                                    @endif
-
-
-                                </div>
 
                             </div>
                             {{--</div>--}}
