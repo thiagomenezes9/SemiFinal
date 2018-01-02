@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -14,7 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::all();
+        return view('post.index',compact('posts'));
     }
 
     /**
@@ -24,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.create');
     }
 
     /**
@@ -35,7 +37,31 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'conteudo' => 'required',
+        ]);
+
+
+        $user = Auth::user();
+
+
+        $post = new Post();
+
+        $post->title = $request->title;
+        $post->content = $request->conteudo;
+
+        $post->user()->associate($user);
+
+
+
+        $post->saveOrFail();
+
+
+
+
+
+        return redirect('posts');
     }
 
     /**
@@ -44,9 +70,11 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        //
+        $post = Post::find($id);
+
+        return view('post.show',compact('post'));
     }
 
     /**
@@ -55,9 +83,13 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+
+
+        return view('post.edit',compact('post'));
     }
 
     /**
@@ -67,9 +99,24 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'conteudo' => 'required',
+        ]);
+
+        $post = Post::find($id);
+
+        $post->title = $request->title;
+        $post->content = $request->conteudo;
+
+        $post->saveOrFail();
+
+
+
+
+        return redirect('posts');
     }
 
     /**

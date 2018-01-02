@@ -45,26 +45,26 @@
                     {{--</a>--}}
 
 
-                <a href="#">
+                <a href="{{route('posts.index')}}">
                     <i class="fa fa-newspaper-o"></i>
                     <span>Posts</span>
-                    <i class="fa fa-angle-left pull-right"></i>
+                    {{--<i class="fa fa-angle-left pull-right"></i>--}}
                 </a>
 
-                <ul class="treeview-menu">
-                    <li class="{{ $menuConItem1 or '' }}">
-                        <a href="#">
-                            <i class='fa fa-newspaper-o'></i>
-                            <span>Meus Posts</span>
-                        </a>
-                    </li>
-                    <li class="{{ $menuConItem2 or '' }}">
-                        <a href="#">
-                            <i class='fa fa-book'></i>
-                            <span>Todos Posts</span>
-                        </a>
-                    </li>
-                </ul>
+                {{--<ul class="treeview-menu">--}}
+                    {{--<li class="{{ $menuConItem1 or '' }}">--}}
+                        {{--<a href="#">--}}
+                            {{--<i class='fa fa-newspaper-o'></i>--}}
+                            {{--<span>Meus Posts</span>--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
+                    {{--<li class="{{ $menuConItem2 or '' }}">--}}
+                        {{--<a href="{{route('posts.index')}}">--}}
+                            {{--<i class='fa fa-book'></i>--}}
+                            {{--<span>Todos Posts</span>--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
+                {{--</ul>--}}
 
 
 
