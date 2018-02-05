@@ -58,6 +58,14 @@ class PostPolicy
     }
 
 
+    public function before($user , $ability){
+        if($user->type == User::_TYPEADMIN){
+            return true;
+        }
+    }
+
+
+
     public function edit(User $user , Post $post){
         return $user->id === $post->user->id;
     }

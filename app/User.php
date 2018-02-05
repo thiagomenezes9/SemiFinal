@@ -11,6 +11,10 @@ class User extends Authenticatable
 {
     use Notifiable, CanResetPassword;
 
+    const _TYPEADMIN = 'ADMIN';
+
+
+
     /**
      * The attributes that are mass assignable.
      *
