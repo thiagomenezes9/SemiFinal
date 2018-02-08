@@ -90,6 +90,13 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
 
 
+        try{
+            $this->authorize('edit', $post);
+        }catch (\Exception $exception){
+//            return 'vc nao pode';
+            //abort(500);
+            return redirect()->route('posts.show',$id)->with('fail','Erro ao tentar editar publicação')->withInput();
+        }
 
         return view('post.edit',compact('post'));
     }
